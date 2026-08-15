@@ -1,0 +1,61 @@
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${GOOGLE_CLIENT_ID}
+            client-secret: ${GOOGLE_CLIENT_SECRET}
+            scope:
+              - openid
+              - profile
+              - email
+  application:
+    name: AI Knowledge Assistant
+
+
+  datasource:
+    url: #add db url use postgres and pgvector
+    username: # add username
+    password: #add password
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+
+  ai:
+    conversation:
+      max-history: 10
+      enable-summary: false
+    openai:
+      api-key: ${OPENROUTER_API_KEY}
+      base-url: https://openrouter.ai/api/v1/
+      chat:
+        model: openrouter/free
+
+logging:
+  level:
+    root: INFO
+    com.enterprise.aiknowledgeassistant: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.orm.jdbc.bind: TRACE
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+
+ai:
+  prompt:
+    version: v1
+    default-role: developer
+    markdown-enabled: true
+    structured-output: false
+    include-best-practices: true
+    include-summary: true
+    policy-enabled: true
